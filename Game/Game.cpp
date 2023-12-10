@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <stdio.h>
 
+
 Game::Game()
 {
 	window = nullptr;
@@ -28,6 +29,15 @@ void Game::InitGame()
 
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	glClearColor(1.f, 0, 0, 1.f);
+
+	InitShaders();
+}
+
+void Game::InitShaders()
+{
+	colorProgram.CompileShaders("Shaders/ColorShading.vert", "Shaders/ColorShading.frag");
+	colorProgram.AddAttributes("vertexPosition");
+	colorProgram.LinkShaders();
 }
 
 void Game::ProcessInput()
@@ -64,6 +74,11 @@ void Game::DrawGame()
 	glClearDepth(1.f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
+	colorProgram.UseProgram();
+
+	newSprite.Draw();
+
+	colorProgram.UnUseProgram();
 
 	SDL_GL_SwapWindow(window);
 }
@@ -71,5 +86,6 @@ void Game::DrawGame()
 void Game::Run()
 {
 	InitGame();
+	newSprite.Init(-1.f,-1.f, 1.f,1.f);
 	GameLoop();
 }

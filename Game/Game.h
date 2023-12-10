@@ -1,5 +1,6 @@
 #pragma once
-
+#include "Sprite.h"
+#include "GLSLProgram.h"
 // Gamestate Enum: To signify current GameState
 enum class GameState
 {
@@ -23,6 +24,8 @@ private:
 
 	// Handles init stuff 
 	void InitGame();
+	// Init Shdaers
+	void InitShaders();
 	// Polls for inputs and SDL_Events
 	void ProcessInput();
 	// Game loop
@@ -34,8 +37,9 @@ private:
 	class SDL_Window* window;
 	// Gamestate enum object 
 	GameState gameState;
-	// SDL event for polling inputs 
-	
+
+	Sprite newSprite;
+	GLSLProgram colorProgram;
 
 };
 
