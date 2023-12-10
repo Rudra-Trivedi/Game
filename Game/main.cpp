@@ -1,6 +1,14 @@
-#include <random>
+#include "Game.h"
+#include <iostream>
 
-int main()
+int main(int argc, char* args[])
 {
-	return 0;
+
+	Game game = Game();
+
+	game.Run();
+
+	return 0; 
+
 }
+
